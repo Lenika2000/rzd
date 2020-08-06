@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered" >
+  <thead>
+  <tr>
+    <th>Поезд</th>
+    <th>Откуда</th>
+    <th>Дата отправления</th>
+    <th>Время отправления</th>
+    <th>Куда</th>
+    <th>Дата прибытия</th>
+    <th>Время прибытия</th>
+    <th><button (click)="createTicket()">Создать</button></th>
+  </tr>
+  </thead>
+  <tr *ngFor="let ticket of tickets">
+    <td>{{ticket.trainId}}</td>
+    <td>{{ticket.fromWhere}}</td>
+    <td>{{ticket.departureDate}}</td>
+    <td>{{ticket.departureTime}}</td>
+    <td>{{ticket.where}}</td>
+    <td>{{ticket.arrivalDate}}</td>
+    <td>{{ticket.arrivalTime}}</td>
+    <td><button (click)="deleteTicket(ticket)">Удалить</button></td>
+    <td><button>Редактировать</button></td>
+  </tr>
+</table>
+<app-form [isVisible]=isVisible></app-form>

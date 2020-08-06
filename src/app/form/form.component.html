@@ -1,0 +1,32 @@
+<form *ngIf="isVisible" #myForm="ngForm" novalidate>
+  <div class="form-group">
+    <label>Поезд</label>
+    <input class="form-control" name="trainId" [(ngModel)]="ticket.trainId" required/>
+  </div>
+  <div class="form-group">
+    <label>Откуда</label>
+    <input type="string" class="form-control" name="fromWhere" [(ngModel)]="ticket.fromWhere" required/>
+  </div>
+  <div class="form-group">
+    <label>Дата Отправления</label>
+    <input type="string"class="form-control" name="departureDate" [(ngModel)]="ticket.departureDate" required/>
+  </div>
+  <div class="form-group">
+    <label>Время отправления</label>
+    <input type="string" class="form-control" name="departureTime" [(ngModel)]="ticket.departureTime" required/>
+  </div>
+  <div class="form-group">
+    <label>Куда</label>
+    <input type="string" class="form-control" name="where" [(ngModel)]="ticket.where" required/>
+  </div>
+  <div class="form-group">
+    <label>Дата Прибытия</label>
+    <input type="string" class="form-control" name="arrivalDate" [(ngModel)]="ticket.arrivalDate" required/>
+  </div>
+  <div class="form-group">
+    <label>Время прибытия</label>
+    <input type="string" class="form-control" name="arrivalTime" [(ngModel)]="ticket.arrivalTime" required/>
+  </div>
+  <button (click)="addTicket()">Добавить в таблицу</button>
+</form>
+
