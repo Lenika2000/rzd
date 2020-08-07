@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Ticket} from '../model/ticket';
 import {TicketsService} from '../services/tickets.service';
 
@@ -7,22 +7,21 @@ import {TicketsService} from '../services/tickets.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit{
   isVisible = false;
   tickets: Ticket[];
-  constructor(private ticketsService: TicketsService) {
 
-    this.tickets = this.ticketsService.getTickets();
+  constructor(private ticketsService: TicketsService) {
+    /*приходит измененный массив из localStorage*/
+    this.ticketsService.observableTickets.subscribe(value => this.tickets = value);
+    this.ticketsService.getTickets();
   }
 
-  // билеты,распределенные по строкам таблицы
-
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   this.tickets = this.ticketsService.getTickets();
-  // }
-
   ngOnInit(): void {
+  }
+
+  onChangedVisible(): void{
+    this.isVisible = false;
   }
 
   createTicket(): void {
@@ -30,6 +29,7 @@ export class TableComponent implements OnInit {
   }
 
   deleteTicket(ticket): void {
-    this.ticketsService.removeTicket(ticket.trainId);
+    this.ticketsService.removeTicket(ticket);
+    this.ticketsService.getTickets();
   }
 }

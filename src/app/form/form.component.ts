@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {Ticket} from '../model/ticket';
 import {TicketsService} from '../services/tickets.service';
 
@@ -12,12 +11,12 @@ export class FormComponent implements OnInit {
 
   constructor(private ticketsService: TicketsService) {
   }
-
-  // форма показывается лишь при нажатии на кнопку добавить
-  @Input() isVisible = false;
+  // форма показывается лишь при нажатии на кнопку создать
+  @Input() public isVisible: boolean;
+  @Output() public visibleChange = new EventEmitter<boolean>();
 
   // новый билет
-  private ticket: Ticket = {
+  public ticket: Ticket = {
     trainId: '',
     fromWhere: '',
     departureDate: '',
@@ -32,8 +31,9 @@ export class FormComponent implements OnInit {
 
   addTicket(): void {
     // добавление билета в локальное хранилище
-    this.isVisible = false;
-    this.ticketsService.addTicket(this.ticket);
+    this.visibleChange.emit();
+    this.ticketsService.addTicket(JSON.stringify(this.ticket));
+    this.ticketsService.getTickets();
   }
 
 }

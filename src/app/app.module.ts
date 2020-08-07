@@ -7,6 +7,7 @@ import { TableComponent } from './table/table.component';
 import { FormComponent } from './form/form.component';
 import {FormsModule} from '@angular/forms';
 import {TicketsService} from './services/tickets.service';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {TicketsService} from './services/tickets.service';
     AppComponent,
     TableComponent,
     FormComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

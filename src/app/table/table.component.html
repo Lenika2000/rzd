@@ -23,4 +23,6 @@
     <td><button>Редактировать</button></td>
   </tr>
 </table>
-<app-form [isVisible]=isVisible></app-form>
+<app-form [isVisible] ='isVisible' (visibleChange)="onChangedVisible()" ></app-form>
+
+
