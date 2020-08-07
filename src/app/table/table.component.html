@@ -1,4 +1,4 @@
-<table class="table table-striped table-bordered" >
+<table class="table table-striped table-bordered">
   <thead>
   <tr>
     <th>Поезд</th>
@@ -8,21 +8,65 @@
     <th>Куда</th>
     <th>Дата прибытия</th>
     <th>Время прибытия</th>
-    <th><button (click)="createTicket()">Создать</button></th>
+    <th>
+      <button (click)="createTicket()">Создать</button>
+    </th>
   </tr>
   </thead>
+  <tbody>
   <tr *ngFor="let ticket of tickets">
-    <td>{{ticket.trainId}}</td>
-    <td>{{ticket.fromWhere}}</td>
-    <td>{{ticket.departureDate}}</td>
-    <td>{{ticket.departureTime}}</td>
-    <td>{{ticket.where}}</td>
-    <td>{{ticket.arrivalDate}}</td>
-    <td>{{ticket.arrivalTime}}</td>
-    <td><button (click)="deleteTicket(ticket)">Удалить</button></td>
-    <td><button>Редактировать</button></td>
+    <ng-template [ngTemplateOutlet]="loadTemplate(ticket)"
+                 [ngTemplateOutletContext]="{ $implicit: ticket}">
+    </ng-template>
   </tr>
+  </tbody>
 </table>
-<app-form [isVisible] ='isVisible' (visibleChange)="onChangedVisible()" ></app-form>
+<app-form [isVisible]='isVisible' (visibleChange)="onChangedVisible()"></app-form>
 
+<!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-ticket>
+  <td>{{ticket.trainId}}</td>
+  <td>{{ticket.fromWhere}}</td>
+  <td>{{ticket.departureDate}}</td>
+  <td>{{ticket.departureTime}}</td>
+  <td>{{ticket.where}}</td>
+  <td>{{ticket.arrivalDate}}</td>
+  <td>{{ticket.arrivalTime}}</td>
+  <td>
+    <button (click)="deleteTicket(ticket)">Удалить</button>
+  </td>
+  <td>
+    <button (click)="setEditTicket(ticket)">Редактировать</button>
+  </td>
+</ng-template>
 
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+  <td>
+    <input type="string" [(ngModel)]="editedTicket.trainId" class="form-control"/>
+  </td>
+  <td>
+    <input type="string" [(ngModel)]="editedTicket.fromWhere" class="form-control"/>
+  </td>
+  <td>
+    <input type="string" [(ngModel)]="editedTicket.departureDate"  class="form-control"/>
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="editedTicket.departureTime" class="form-control"/>
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="editedTicket.where" class="form-control"/>
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="editedTicket.arrivalDate" class="form-control"/>
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="editedTicket.arrivalTime" class="form-control"/>
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="editTicket(editedTicket)" class="btn btn-success"/>
+  </td>
+  <td>
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning"/>
+  </td>
+</ng-template>

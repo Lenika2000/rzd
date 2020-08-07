@@ -27,23 +27,12 @@ export class TicketsService {
     localStorage.setItem('ticketsList', JSON.stringify(Array.from(this.tickets)));
   }
 
-  removeTicket(ticket: Ticket): void {
+  removeTicket(ticket: string): void {
+    console.log('delete' + JSON.stringify(ticket));
     this.tickets = new Set<string>(JSON.parse(localStorage.getItem('ticketsList')));
-    this.tickets.delete(JSON.stringify(ticket));
+    this.tickets.delete(ticket);
     localStorage.setItem('ticketsList', JSON.stringify(Array.from(this.tickets)));
   }
-
-  // //ToDo получить билет, заменить данные, добавить, старый удалить
-  // updateTicket(ticket: Ticket): void {
-  //   this.tickets1 = JSON.parse(localStorage.getItem('ticketsList'));
-  //   localStorage.removeItem('ticketsList');
-  //   for (let i = this.tickets1.length - 1; i >= 0; i--) {
-  //     if (this.tickets1[i].trainId === ticket.trainId) {
-  //       this.tickets1[i] = ticket;
-  //     }
-  //   }
-  //   localStorage.setItem('ticketsList', JSON.stringify(this.tickets1));
-  // }
 
   // получение билетов из локального хранилища
   getTickets(): void {
