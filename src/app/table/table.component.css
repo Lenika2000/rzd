@@ -1,0 +1,59 @@
+#rzdLogo {
+  background: url("../../assets/rzd.jpg") !important;
+  height: 56px !important;
+}
+
+/*избавляемся от нумерованного списка*/
+.listTable {
+  margin: 0;
+  padding: 0;
+}
+
+table div {
+  overflow-x: auto;
+  width: 140px !important;
+}
+
+.cansel {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.create {
+  background: white;
+}
+
+.create:hover {
+  color: #e21a1a;
+}
+
+.delete {
+  margin-left: 9px;
+}
+
+th, td:first-child {
+  background: #e21a1a;
+  color: white;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+th, td {
+  width: 140px !important;
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  border-color: #8e0707 !important;
+  text-align: center;
+}
+
+td {
+  background: white;
+}
+
+th:first-child, td:first-child {
+  text-align: left;
+}
+
+th {
+  height: 56px !important;
+}

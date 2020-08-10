@@ -1,0 +1,10 @@
+#form {
+  position: relative;
+  width: 500px;
+  left: 400px;
+}
+.alert {
+  padding: 0.25rem;
+  line-height: 0.75;
+  margin-bottom: 0rem;
+}

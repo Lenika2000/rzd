@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Ticket} from '../model/ticket';
 import {TicketsService} from '../services/tickets.service';
 
@@ -27,10 +27,12 @@ export class TableComponent implements OnInit{
 
   // редактирование пользователя
   setEditTicket(ticket: Ticket): void {
-    this.oldTicket = JSON.stringify(new Ticket(ticket.trainId, ticket.fromWhere, ticket.departureDate, ticket.departureTime,
-      ticket.fromWhere, ticket.arrivalDate, ticket.arrivalTime));
+    this.cancel();
+    this.oldTicket = JSON.stringify(ticket);
     this.editedTicket = ticket;
   }
+
+
   // загружаем один из двух шаблонов
   loadTemplate(ticket: Ticket): TemplateRef<any> {
     if (this.editedTicket && JSON.stringify(this.editedTicket) === JSON.stringify(ticket)) {

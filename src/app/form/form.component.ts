@@ -34,6 +34,15 @@ export class FormComponent implements OnInit {
     this.visibleChange.emit();
     this.ticketsService.addTicket(JSON.stringify(this.ticket));
     this.ticketsService.getTickets();
+    this.cleanButtonClicked();
   }
 
+  cleanButtonClicked(): void {
+    this.ticket = new Ticket('', '', '', '', '', '', '');
+  }
+
+  closeForm(): void {
+    this.cleanButtonClicked();
+    this.visibleChange.emit();
+  }
 }

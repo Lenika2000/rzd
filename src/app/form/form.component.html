@@ -1,35 +1,89 @@
-<form *ngIf="isVisible" #myForm="ngForm" novalidate>
-  <div class="form-group">
-    <label>Поезд</label>
-    <input class="form-control" name="trainId" [(ngModel)]="ticket.trainId" required/>
-  </div>
-  <div class="form-group">
-    <label>Откуда</label>
-    <input type="string" class="form-control" name="fromWhere" [(ngModel)]="ticket.fromWhere" required/>
-  </div>
-  <div class="form-group">
-    <label>Дата Отправления</label>
-    <input type="string"class="form-control" name="departureDate" [(ngModel)]="ticket.departureDate" required/>
-  </div>
-  <div class="form-group">
-    <label>Время отправления</label>
-    <input type="string" class="form-control" name="departureTime" [(ngModel)]="ticket.departureTime" required/>
-  </div>
-  <div class="form-group">
-    <label>Куда</label>
-    <input type="string" class="form-control" name="where" [(ngModel)]="ticket.where" required/>
-  </div>
-  <div class="form-group">
-    <label>Дата Прибытия</label>
-    <input type="string" class="form-control" name="arrivalDate" [(ngModel)]="ticket.arrivalDate" required/>
-  </div>
-  <div class="form-group">
-    <label>Время прибытия</label>
-    <input type="string" class="form-control" name="arrivalTime" [(ngModel)]="ticket.arrivalTime" required/>
-  </div>
-  <button (click)="addTicket()">Добавить в таблицу</button>
-</form>
-
+<div id="form">
+  <form *ngIf="isVisible" #myForm="ngForm" novalidate>
+    <div class="form-group">
+      <label>Поезд</label>
+      <input #trainId="ngModel" name="trainId" class="form-control form-control-sm" [(ngModel)]="ticket.trainId"
+             placeholder="№ поезда" required/>
+      <div class="alert alert-danger" [hidden]="trainId.valid || trainId.pristine">
+        Поле 'Поезд' обязательно для заполнения
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Город отправления</label>
+      <input #fromWhere="ngModel" type="string" class="form-control form-control-sm" name="fromWhere"
+             [(ngModel)]="ticket.fromWhere" placeholder="Введите город отправления" required/>
+      <div class="alert alert-danger" [hidden]="fromWhere.valid || fromWhere.pristine">
+        Поле 'Город отправления' обязательно для заполнения
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Дата отправления</label>
+        <input #departureDate="ngModel" type="date" class="form-control form-control-sm" name="departureDate"
+               [(ngModel)]="ticket.departureDate" required/>
+        <div class="alert alert-danger" [hidden]="departureDate.valid || departureDate.pristine">
+          Поле 'Дата отправления' обязательно для заполнения
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <!--        (# Нaчaлo гpyппы 1  [01]?[0-9]        -->
+        <!--        # Дoлжнo нaчинaтьcя c 0-9, 00-09 или 10-19.  |      -->
+        <!--        # Или  2[0-3]           -->
+        <!--        #  Дoлжнo нaчинaтьcя c 20-23. )        -->
+        <!--        # Koнeц гpyппы 1  :       -->
+        <!--        # Дaльшe cлeдyeт двoeтoчиe (:)   [0-5][0-9]        -->
+        <!--        # Пocлe чeгo дoлжнa идти цифpa oт 0 дo 5,                     -->
+        <!--        # зa koтopoй - цифpa oт 0 дo 9, чтo дaeт 00...59.-->
+        <label>Время отправления</label>
+        <input #departureTime="ngModel" type="text" class="form-control form-control-sm" name="departureTime"
+               [(ngModel)]="ticket.departureTime" placeholder="чч:мм" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required/>
+        <div *ngIf="departureTime.invalid && (departureTime.dirty || departureTime.touched)">
+          <div class="alert alert-danger" *ngIf="departureTime.errors.required">
+            Поле 'Время отправления' обязательно для заполнения
+          </div>
+          <div class="alert alert-danger" *ngIf="departureTime.errors.pattern">
+            Введите время в формате чч:мм
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Город прибытия</label>
+      <input #where="ngModel" type="text" class="form-control form-control-sm" name="where" [(ngModel)]="ticket.where"
+             placeholder="Введите город прибытия" required/>
+      <div class="alert alert-danger" [hidden]="where.valid || where.pristine">
+        Поле 'Город прибытия' обязательно для заполнения
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Дата прибытия</label>
+        <input #arrivalDate="ngModel" type="date" class="form-control form-control-sm" name="arrivalDate"
+               [(ngModel)]="ticket.arrivalDate" required/>
+        <div class="alert alert-danger" [hidden]="arrivalDate.valid || arrivalDate.pristine">
+          Поле 'Дата прибытия' обязательно для заполнения
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Время прибытия</label>
+        <input #arrivalTime="ngModel" type="text" class="form-control form-control-sm" name="arrivalTime"
+               [(ngModel)]="ticket.arrivalTime" placeholder="чч:мм" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" required/>
+        <div *ngIf="arrivalTime.invalid && (arrivalTime.dirty || arrivalTime.touched)">
+          <div class="alert alert-danger" *ngIf="arrivalTime.errors.required">
+            Поле 'Время прибытия' обязательно для заполнения
+          </div>
+          <div class="alert alert-danger" *ngIf="arrivalTime.errors.pattern">
+            Введите время в формате чч:мм
+          </div>
+        </div>
+      </div>
+    </div>
+    <button [disabled]="myForm.invalid" (click)="addTicket()" class="btn btn-outline-danger btn-sm">Добавить в таблицу
+    </button>
+    <button type="reset" (click)="cleanButtonClicked();" class="btn btn-outline-danger btn-sm">Очистить</button>
+    <button (click)="closeForm();" class="btn btn-outline-danger btn-sm">Закрыть</button>
+  </form>
+</div>
 
 
 

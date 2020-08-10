@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+/*стилизованный скроллер*/
+.tdScroll {
+  width: 65px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.tdScroll::-webkit-scrollbar-track, ::-webkit-scrollbar-track {
+  background-color: rgba(13, 0, 60, 0.17);
+  box-shadow: 1px 1px 3px #ffcde8 inset;
+  margin: 3px;
+
+}
+
+.tdScroll::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb { /* цвет бегунка полосы, а так же его закругление. */
+  background-color: rgb(233, 73, 57);
+}
+
+.tdScroll::-webkit-scrollbar, ::-webkit-scrollbar { /*Основная ширина полосы прокрутки.*/
+  height: 6px;
+}
+

@@ -15,10 +15,10 @@ export class TicketsService {
     // инициализация табл данными
     if (localStorage.getItem('isFirstRun') == null){
       localStorage.setItem('isFirstRun', 'false' );
-      this.addTicket(JSON.stringify(new Ticket('№ 074Е', 'Санкт-Петербург', '24.09.2020', '14:01',
-        'Екатеринбург', '26.09.2020', '03:41')));
-      this.addTicket(JSON.stringify(new Ticket('№ 076Е', 'Санкт-Петербург', '27.09.2020', '16:01',
-        'Екатеринбург', '29.09.2020', '05:41')));
+      this.addTicket(JSON.stringify(new Ticket('№ 074Е', 'Санкт-Петербург', '24-09-2020', '14:01',
+        'Екатеринбург', '26-09-2020', '03:41')));
+      this.addTicket(JSON.stringify(new Ticket('№ 076Е', 'Санкт-Петербург', '27-09-2020', '16:01',
+        'Екатеринбург', '29-09-2020', '05:41')));
     }
   }
 
@@ -28,7 +28,6 @@ export class TicketsService {
   }
 
   removeTicket(ticket: string): void {
-    console.log('delete' + JSON.stringify(ticket));
     this.tickets = new Set<string>(JSON.parse(localStorage.getItem('ticketsList')));
     this.tickets.delete(ticket);
     localStorage.setItem('ticketsList', JSON.stringify(Array.from(this.tickets)));
