@@ -19,3 +19,8 @@
 
 Результат работы:
 ![2](./src/assets/mainPage.png)
+
+Запуск:
+ * в папке rzd-master в консоли вводим npm install(установка необходимых модулей),
+ * затем ng serve --open
+
