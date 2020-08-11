@@ -16,5 +16,6 @@
  * Использование роутера Angular
  
 ![1](./src/assets/task.png)
+
 Результат работы:
 ![2](./src/assets/mainPage.png)
