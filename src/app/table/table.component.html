@@ -42,7 +42,7 @@
     </ng-template>
   </li>
 </ul>
-<app-form [isVisible]='isVisible' (visibleChange)="onChangedVisible()"></app-form>
+<app-form [isVisible]='isVisible' (visibleChange)="onChangedVisible()" (resetEditEmit)="cancel()"></app-form>
 
 <!--шаблон для чтения-->
 <ng-template #readOnlyTemplate let-ticket>
@@ -75,7 +75,9 @@
     </td>
     <td>
       <div>
-        <button (click)="setEditTicket(ticket)" class="btn btn-outline-danger btn-sm">Редактировать</button>
+        <button (click)="setEditTicket(ticket)" [disabled]="editMode" class="btn btn-outline-danger btn-sm">
+          Редактировать
+        </button>
       </div>
     </td>
   </table>

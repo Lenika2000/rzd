@@ -7,7 +7,7 @@ import {TicketsService} from '../services/tickets.service';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit{
+export class TableComponent implements OnInit {
   // типы шаблонов(для чтения или редактирования)
   @ViewChild('readOnlyTemplate', {static: false}) readOnlyTemplate: TemplateRef<any>;
   @ViewChild('editTemplate', {static: false}) editTemplate: TemplateRef<any>;
@@ -15,6 +15,7 @@ export class TableComponent implements OnInit{
   oldTicket: string;
   isVisible = false;
   tickets: Ticket[];
+  editMode = false; // существует ли редактируемая строка
 
   constructor(private ticketsService: TicketsService) {
   }
@@ -27,7 +28,7 @@ export class TableComponent implements OnInit{
 
   // редактирование пользователя
   setEditTicket(ticket: Ticket): void {
-    this.cancel();
+    this.editMode = true;
     this.oldTicket = JSON.stringify(ticket);
     this.editedTicket = ticket;
   }
@@ -44,12 +45,15 @@ export class TableComponent implements OnInit{
 
   // отмена редактирования
   cancel(): void {
+    this.editMode = false;
     this.editedTicket = null;
     this.oldTicket = null;
+    this.ticketsService.getTickets(); // если даже пользователь что-то изменил в билете,
+    // чтобы в табл отобразилиcь данные из localStorage
   }
 
   // поле для заполнения вновь становится невидимым после добавления нового билета
-  onChangedVisible(): void{
+  onChangedVisible(): void {
     this.isVisible = false;
   }
 
@@ -58,6 +62,7 @@ export class TableComponent implements OnInit{
   }
 
   deleteTicket(ticket): void {
+    this.editMode = false; // снятие блокировок с кнопок редактировать
     this.ticketsService.removeTicket(JSON.stringify(ticket));
     this.ticketsService.getTickets();
   }
@@ -65,8 +70,6 @@ export class TableComponent implements OnInit{
   editTicket(ticket): void {
     this.ticketsService.removeTicket(this.oldTicket);
     this.ticketsService.addTicket(JSON.stringify(ticket));
-    this.oldTicket = null;
-    this.editedTicket = null;
-    this.ticketsService.getTickets();
+    this.cancel();
   }
 }

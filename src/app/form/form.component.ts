@@ -11,9 +11,11 @@ export class FormComponent implements OnInit {
 
   constructor(private ticketsService: TicketsService) {
   }
+
   // форма показывается лишь при нажатии на кнопку создать
   @Input() public isVisible: boolean;
   @Output() public visibleChange = new EventEmitter<boolean>();
+  @Output() public resetEditEmit = new EventEmitter();
 
   // новый билет
   public ticket: Ticket = {
@@ -31,10 +33,12 @@ export class FormComponent implements OnInit {
 
   addTicket(): void {
     // добавление билета в локальное хранилище
-    this.visibleChange.emit();
+    this.visibleChange.emit(); // скрытие формы добавления
     this.ticketsService.addTicket(JSON.stringify(this.ticket));
     this.ticketsService.getTickets();
-    this.cleanButtonClicked();
+    this.cleanButtonClicked(); // очистка формы
+    // при добавлении нового билета убирает блокировку с кнопки редактирования
+    this.resetEditEmit.emit();
   }
 
   cleanButtonClicked(): void {

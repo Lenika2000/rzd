@@ -13,12 +13,14 @@ export class TicketsService {
 
   constructor() {
     // инициализация табл данными
-    if (localStorage.getItem('isFirstRun') == null){
-      localStorage.setItem('isFirstRun', 'false' );
-      this.addTicket(JSON.stringify(new Ticket('№ 074Е', 'Санкт-Петербург', '24-09-2020', '14:01',
-        'Екатеринбург', '26-09-2020', '03:41')));
-      this.addTicket(JSON.stringify(new Ticket('№ 076Е', 'Санкт-Петербург', '27-09-2020', '16:01',
-        'Екатеринбург', '29-09-2020', '05:41')));
+    if (localStorage.getItem('isFirstRun') == null) {
+      localStorage.setItem('isFirstRun', 'false');
+      this.addTicket(JSON.stringify(new Ticket('№ 074Е', 'Санкт-Петербург', '2020-09-01', '14:01',
+        'Екатеринбург', '2020-09-03', '03:41')));
+      this.addTicket(JSON.stringify(new Ticket('№ 076Е', 'Санкт-Петербург', '2020-09-07', '16:01',
+        'Екатеринбург', '2020-09-09', '05:41')));
+      this.addTicket(JSON.stringify(new Ticket('№ 078Е', 'Санкт-Петербург', '2020-09-17', '16:01',
+        'Екатеринбург', '2020-09-19', '05:41')));
     }
   }
 
