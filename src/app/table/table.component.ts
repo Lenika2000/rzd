@@ -62,9 +62,8 @@ export class TableComponent implements OnInit {
   }
 
   deleteTicket(ticket): void {
-    this.editMode = false; // снятие блокировок с кнопок редактировать
     this.ticketsService.removeTicket(JSON.stringify(ticket));
-    this.ticketsService.getTickets();
+    this.cancel();
   }
 
   editTicket(ticket): void {
